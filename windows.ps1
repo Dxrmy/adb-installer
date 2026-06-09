@@ -5,7 +5,8 @@ $installDir = "C:\Android"
 $adbPath = "$installDir\platform-tools"
 
 Write-Host "Downloading latest ADB for Windows..."
-Invoke-WebRequest -Uri $downloadUrl -OutFile $tempZipPath
+$webClient = New-Object System.Net.WebClient
+$webClient.DownloadFile($downloadUrl, $tempZipPath)
 
 if (-not (Test-Path $installDir)) { New-Item -ItemType Directory -Path $installDir | Out-Null }
 if (Test-Path $adbPath) { Remove-Item -Path $adbPath -Recurse -Force }
