@@ -7,7 +7,7 @@ TEMP_ZIP="/tmp/platform-tools.zip"
 INSTALL_DIR="$HOME/.local/share/android"
 ADB_PATH="$INSTALL_DIR/platform-tools"
 
-curl -sL $URL -o $TEMP_ZIP
+curl -L --progress-bar "$URL" -o "$TEMP_ZIP"
 mkdir -p "$INSTALL_DIR"
 rm -rf "$ADB_PATH"
 

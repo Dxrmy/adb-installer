@@ -4,7 +4,7 @@ $tempZipPath = "$env:TEMP\platform-tools.zip"
 $installDir = "C:\Android"
 $adbPath = "$installDir\platform-tools"
 
-Write-Host "Downloading latest ADB for Windows..."
+Write-Host "Downloading latest ADB for Windows (This may take a moment)..."
 $webClient = New-Object System.Net.WebClient
 $webClient.DownloadFile($downloadUrl, $tempZipPath)
 
