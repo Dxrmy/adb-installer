@@ -1,15 +1,14 @@
-[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $ErrorActionPreference = "Stop"
 
 function Show-CatHeader {
     Clear-Host
+    [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+    $b64 = "ICDilbF844CBICAgICAgIG1lb3cuCijLmsuOIOOAgjcgICAgIC8KIHzjgIHLnOOAtSAgICAgICAgICAKIOOBmOOBl8uNLCnjg44="
+    $cat = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b64))
     Write-Host ""
-    Write-Host "  ╱|、       meow." -ForegroundColor Magenta
-    Write-Host "(˚ˎ 。7     /" -ForegroundColor Magenta
-    Write-Host " |、˜〵          " -ForegroundColor Magenta
-    Write-Host " じしˍ,)ノ" -ForegroundColor Magenta
+    Write-Host $cat -ForegroundColor Magenta
     Write-Host ""
-    Write-Host " Universal ADB Manager" -ForegroundColor Cyan
+    Write-Host "       Universal ADB Manager" -ForegroundColor Cyan
     Write-Host ""
 }
 
