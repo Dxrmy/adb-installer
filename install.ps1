@@ -24,6 +24,7 @@ function Invoke-FastDownload {
         $buffer = New-Object byte[] 65536
         $count = 0
         $downloaded = 0
+        $lastPercent = -1
         
         do {
             $count = $responseStream.Read($buffer, 0, $buffer.Length)
@@ -32,7 +33,10 @@ function Invoke-FastDownload {
                 $downloaded += $count
                 if ($totalLength -gt 0) {
                     $percent = [math]::Round(($downloaded / $totalLength) * 100)
-                    Write-Progress -Activity "Downloading Platform Tools" -Status "$percent% Complete" -PercentComplete $percent -Id 1
+                    if ($percent -ne $lastPercent) {
+                        Write-Progress -Activity "Downloading Platform Tools" -Status "$percent% Complete" -PercentComplete $percent -Id 1
+                        $lastPercent = $percent
+                    }
                 }
             }
         } while ($count -gt 0)
