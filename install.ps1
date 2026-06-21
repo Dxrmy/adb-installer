@@ -81,17 +81,19 @@ function Install-Adb {
             [Environment]::SetEnvironmentVariable("PATH", "$userPath;$binDir", "User")
         }
     } else {
-        $exportLine = "`nexport PATH=`"`$PATH:$binDir`""
+        $escapedBinDir = $binDir -replace "'", "'\''"
+        $exportLine = "`nexport PATH=`"`$PATH`":'$escapedBinDir'"
         foreach ($profile in @("$HOME/.bashrc", "$HOME/.zshrc")) {
             if (Test-Path $profile) {
                 $content = Get-Content $profile -Raw
-                if ($content -notmatch [regex]::Escape($binDir)) {
+                if ($null -eq $content -or $content -notmatch [regex]::Escape($escapedBinDir)) {
                     Add-Content -Path $profile -Value $exportLine
                 }
             }
         }
         $adbExe = Join-Path $binDir "adb"
-        if (Test-Path $adbExe) { bash -c "chmod +x '$adbExe'" }
+        $escapedAdbExe = $adbExe -replace "'", "'\''"
+        if (Test-Path $adbExe) { bash -c "chmod +x '$escapedAdbExe'" }
     }
 
     Write-Host " [v] Successfully installed ADB!" -ForegroundColor Green
