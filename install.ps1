@@ -1,5 +1,8 @@
 $ErrorActionPreference = "Stop"
 
+$installDir = Join-Path $HOME ".adb"
+$binDir = Join-Path $installDir "platform-tools"
+
 function Show-CatHeader {
     Clear-Host
     [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
@@ -45,9 +48,6 @@ function Invoke-FastDownload {
 }
 
 function Install-Adb {
-    $installDir = Join-Path $HOME ".adb"
-    $binDir = Join-Path $installDir "platform-tools"
-    
     if ($IsMacOS) {
         $url = "https://dl.google.com/android/repository/platform-tools-latest-darwin.zip"
     } elseif ($IsLinux) {
@@ -99,9 +99,6 @@ function Install-Adb {
 }
 
 function Uninstall-Adb {
-    $installDir = Join-Path $HOME ".adb"
-    $binDir = Join-Path $installDir "platform-tools"
-
     Write-Host " [*] Removing ADB files..." -ForegroundColor Yellow
     if (Test-Path $installDir) {
         Remove-Item -Path $installDir -Recurse -Force
