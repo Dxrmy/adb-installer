@@ -45,7 +45,7 @@ install_adb() {
     
     for profile in "$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.bash_profile"; do
         if [ -f "$profile" ]; then
-            if ! grep -q "$BIN_DIR" "$profile"; then
+            if ! grep -Fq "$BIN_DIR" "$profile"; then
                 echo -e "$EXPORT_LINE" >> "$profile"
             fi
         fi
