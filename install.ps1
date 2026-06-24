@@ -91,7 +91,7 @@ function Install-Adb {
             }
         }
         $adbExe = Join-Path $binDir "adb"
-        if (Test-Path $adbExe) { bash -c "chmod +x '$adbExe'" }
+        if (Test-Path $adbExe) { chmod +x $adbExe }
     }
 
     Write-Host " [v] Successfully installed ADB!" -ForegroundColor Green
