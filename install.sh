@@ -72,16 +72,18 @@ uninstall_adb() {
     echo -e "\e[32m [v] Successfully uninstalled ADB!\e[0m"
 }
 
-echo -e "\e[37m 1. Install ADB\e[0m"
-echo -e "\e[37m 2. Uninstall ADB\e[0m"
-echo ""
-read -p " Select an option (1/2): " choice
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    echo -e "\e[37m 1. Install ADB\e[0m"
+    echo -e "\e[37m 2. Uninstall ADB\e[0m"
+    echo ""
+    read -p " Select an option (1/2): " choice
 
-echo ""
-if [ "$choice" == "1" ]; then
-    install_adb
-elif [ "$choice" == "2" ]; then
-    uninstall_adb
-else
-    echo -e "\e[31m [x] Invalid option selected.\e[0m"
+    echo ""
+    if [ "$choice" == "1" ]; then
+        install_adb
+    elif [ "$choice" == "2" ]; then
+        uninstall_adb
+    else
+        echo -e "\e[31m [x] Invalid option selected.\e[0m"
+    fi
 fi
