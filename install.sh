@@ -41,11 +41,12 @@ install_adb() {
     rm -f "$ZIP_PATH"
 
     echo -e "\e[33m [*] Adding to system PATH...\e[0m"
-    EXPORT_LINE="\nexport PATH=\"\$PATH:$BIN_DIR\""
+    printf -v QUOTED_BIN "%q" "$BIN_DIR"
+    EXPORT_LINE="\nexport PATH=\"\$PATH\":$QUOTED_BIN"
     
     for profile in "$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.bash_profile"; do
         if [ -f "$profile" ]; then
-            if ! grep -q "$BIN_DIR" "$profile"; then
+            if ! grep -qF "$BIN_DIR" "$profile"; then
                 echo -e "$EXPORT_LINE" >> "$profile"
             fi
         fi
