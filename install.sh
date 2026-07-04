@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+INSTALL_DIR="$HOME/.adb"
+BIN_DIR="$INSTALL_DIR/platform-tools"
+
 # Cat ASCII Art
 echo -e "\e[35m  ╱|、       meow.\e[0m"
 echo -e "\e[35m(˚ˎ 。7     /\e[0m"
@@ -11,9 +14,6 @@ echo -e "\e[36m Universal ADB Manager\e[0m"
 echo ""
 
 install_adb() {
-    INSTALL_DIR="$HOME/.adb"
-    BIN_DIR="$INSTALL_DIR/platform-tools"
-    
     if [[ "$OSTYPE" == "darwin"* ]]; then
         URL="https://dl.google.com/android/repository/platform-tools-latest-darwin.zip"
     else
@@ -60,9 +60,6 @@ install_adb() {
 }
 
 uninstall_adb() {
-    INSTALL_DIR="$HOME/.adb"
-    BIN_DIR="$INSTALL_DIR/platform-tools"
-
     echo -e "\e[33m [*] Removing ADB files...\e[0m"
     rm -rf "$INSTALL_DIR"
 
